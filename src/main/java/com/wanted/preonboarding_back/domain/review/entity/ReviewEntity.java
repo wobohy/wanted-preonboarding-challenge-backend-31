@@ -1,7 +1,7 @@
 package com.wanted.preonboarding_back.domain.review.entity;
 
-import com.wanted.preonboarding_back.domain.product.entity.Product;
-import com.wanted.preonboarding_back.domain.user.entity.User;
+import com.wanted.preonboarding_back.domain.product.entity.ProductEntity;
+import com.wanted.preonboarding_back.domain.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,18 +11,18 @@ import lombok.NoArgsConstructor;
 @Table(name = "reviews")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review {
+public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    private ProductEntity productEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
     @Column(nullable = false)
     private Integer rating;

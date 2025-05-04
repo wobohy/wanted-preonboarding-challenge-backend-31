@@ -1,0 +1,16 @@
+package com.wanted.preonboarding_back.global.common.api;
+
+import lombok.Getter;
+
+@Getter
+public class PaginationRequest {
+    private int page = 1;
+    
+    private int perPage = 10;
+
+    private String sort = "created_at:desc";
+    
+    public int getOffset() {
+        return (page - 1) * perPage;
+    }
+}

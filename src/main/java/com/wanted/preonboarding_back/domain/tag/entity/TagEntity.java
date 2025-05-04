@@ -1,4 +1,4 @@
-package com.wanted.preonboarding_back.domain.brand.entity;
+package com.wanted.preonboarding_back.domain.tag.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "brands")
+@Table(name = "tags")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Brand {
+public class TagEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,12 +19,5 @@ public class Brand {
 
     @Column(nullable = false, unique = true)
     private String slug;
-
-    private String description;
-
-    @Column(name = "logo_url")
-    private String logoUrl;
-
-    private String website;
 
 }

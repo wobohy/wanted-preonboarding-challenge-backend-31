@@ -11,14 +11,14 @@ import java.math.BigDecimal;
 @Table(name = "product_options")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductOption {
+public class ProductOptionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_group_id")
-    private ProductOptionGroup optionGroup;
+    private ProductOptionGroupEntity optionGroup;
 
     @Column(nullable = false)
     private String name;

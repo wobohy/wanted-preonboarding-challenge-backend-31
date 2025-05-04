@@ -5,33 +5,29 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "product_images")
+@Table(name = "product_option_groups")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductImage {
+public class ProductOptionGroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    private ProductEntity productEntity;
 
     @Column(nullable = false)
-    private String url;
-
-    @Column(name = "alt_text")
-    private String altText;
-
-    @Column(name = "is_primary")
-    private boolean isPrimary;
+    private String name;
 
     @Column(name = "display_order")
     private Integer displayOrder;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "option_id")
-    private ProductOption option;
+    @OneToMany(mappedBy = "optionGroup", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductOptionEntity> options = new ArrayList<>();
 
 }

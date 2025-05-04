@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Table(name = "product_prices")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductPrice {
+public class ProductPriceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class ProductPrice {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    private ProductEntity productEntity;
 
     @Column(name = "base_price", nullable = false)
     private BigDecimal basePrice;

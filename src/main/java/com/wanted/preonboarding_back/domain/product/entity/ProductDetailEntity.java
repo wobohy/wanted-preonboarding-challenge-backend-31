@@ -5,11 +5,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "product_details")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductDetail {
+public class ProductDetailEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +19,9 @@ public class ProductDetail {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    private ProductEntity productEntity;
 
-    private Double weight;
+    private BigDecimal weight;
 
     @Column(columnDefinition = "jsonb")
     private String dimensions;

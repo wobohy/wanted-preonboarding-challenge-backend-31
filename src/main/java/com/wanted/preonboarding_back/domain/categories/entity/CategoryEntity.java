@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "categories")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Categories {
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +27,7 @@ public class Categories {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Categories parent;
+    private CategoryEntity parent;
 
     @Column(nullable = false)
     private Integer level;
@@ -36,6 +36,6 @@ public class Categories {
     private String imageUrl;
 
     @OneToMany(mappedBy = "parent")
-    private List<Categories> children = new ArrayList<>();
+    private List<CategoryEntity> children = new ArrayList<>();
 
 }

@@ -5,11 +5,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "sellers")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Seller {
+public class SellerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +24,7 @@ public class Seller {
     @Column(name = "logo_url")
     private String logoUrl;
 
-    private Double rating;
+    private BigDecimal rating;
 
     @Column(name = "contact_email")
     private String contactEmail;
