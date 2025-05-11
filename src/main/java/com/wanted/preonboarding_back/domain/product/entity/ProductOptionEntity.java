@@ -16,9 +16,9 @@ public class ProductOptionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "option_group_id")
-    private ProductOptionGroupEntity optionGroup;
+    private ProductOptionGroupEntity productOptionGroupEntity;
 
     @Column(nullable = false)
     private String name;

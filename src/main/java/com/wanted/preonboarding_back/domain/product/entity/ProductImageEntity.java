@@ -32,6 +32,6 @@ public class ProductImageEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_id")
-    private ProductOptionEntity option;
+    private ProductOptionEntity productOptionEntity;
 
 }

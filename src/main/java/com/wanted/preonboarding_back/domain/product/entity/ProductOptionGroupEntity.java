@@ -27,7 +27,7 @@ public class ProductOptionGroupEntity {
     @Column(name = "display_order")
     private Integer displayOrder;
 
-    @OneToMany(mappedBy = "optionGroup", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductOptionEntity> options = new ArrayList<>();
+    @OneToMany(mappedBy = "productOptionGroupEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductOptionEntity> productOptionEntities = new ArrayList<>();
 
 }

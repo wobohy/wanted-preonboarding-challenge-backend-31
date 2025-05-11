@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
@@ -18,20 +16,8 @@ public class ProductController {
     private final ProductService productService;
     
     @GetMapping
-    public ResponseEntity<ApiResponse<PaginationResponse<ProductListResponseDto>>> getProductList(@RequestParam(required = false) int page,
-                                                                                                  @RequestParam(required = false) int size,
-                                                                                                  @RequestParam(required = false) String sort,
-                                                                                                @RequestParam(required = false) String status,
-                                                                                                @RequestParam(required = false) int minPrice,
-                                                                                                @RequestParam(required = false) int maxPrice,
-                                                                                                @RequestParam(required = false) int[] category,
-                                                                                                @RequestParam(required = false) int seller,
-                                                                                                @RequestParam(required = false) int brand,
-                                                                                                @RequestParam(required = false) boolean inStock,
-                                                                                                @RequestParam(required = false) String search) {
-
-        List<ProductListResponseDto> productList = productService.getProductList();
-        return ResponseEntity.ok(ApiResponse.success(new PaginationResponse<>(productList, null)));
+    public ResponseEntity<ApiResponse<PaginationResponse<ProductListResponseDto>>> getProductList(ProductRequestDto requestDto) {
+        return ApiResponse.success(productService.getProductList(requestDto));
     }
 
     @GetMapping("/{id}")

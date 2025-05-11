@@ -11,6 +11,6 @@ public class PaginationRequest {
     private String sort = "created_at:desc";
     
     public int getOffset() {
-        return (page - 1) * perPage;
+        return page * perPage;
     }
 }

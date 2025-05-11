@@ -1,13 +1,9 @@
 package com.wanted.preonboarding_back.domain.product.service;
 
-import com.wanted.preonboarding_back.domain.product.repository.ProductRepository;
-import org.springframework.stereotype.Service;
+import com.wanted.preonboarding_back.domain.product.dto.ProductListResponseDto;
+import com.wanted.preonboarding_back.domain.product.dto.ProductRequestDto;
+import com.wanted.preonboarding_back.global.common.api.PaginationResponse;
 
-@Service
-public class ProductService {
-    private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+public interface ProductService {
+    public PaginationResponse<ProductListResponseDto> getProductList(ProductRequestDto requestDto);
 }
