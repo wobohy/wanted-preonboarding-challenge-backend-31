@@ -3,9 +3,11 @@ package com.wanted.preonboarding_back.domain.product.dto;
 import com.wanted.preonboarding_back.global.common.api.PaginationRequest;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class ProductRequestDto extends PaginationRequest {
     private String status;
     @Min(0)

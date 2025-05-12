@@ -38,16 +38,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public PaginationResponse<ProductListResponseDto> getProductList(ProductRequestDto requestDto) {
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<ProductEntity> query = cb.createQuery(ProductEntity.class);
-//        Root<ProductEntity> product = query.from(ProductEntity.class);
-
         Specification<ProductEntity> spec = (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
             // 검색어 조건
             if (StringUtils.hasText(requestDto.getSearch())) {
-                predicates.add(cb.like(root.get("name"), "%" + requestDto.getSearch() + "%"));
+                String searchPattern = "%" + requestDto.getSearch() + "%";
+                predicates.add(cb.like(root.get("name"), searchPattern));
             }
 
             // 가격 범위 조건
@@ -92,32 +89,23 @@ public class ProductServiceImpl implements ProductService {
         };
 
         PageRequest pageRequest = PageRequest.of(
-                requestDto.getPage() == 0 ? 1 : requestDto.getPage(),
+                Math.max(0, requestDto.getPage()),
                 requestDto.getPerPage() == 0 ? 10 : requestDto.getPerPage(),
                 getSort(requestDto.getSort())
         );
         Page<ProductEntity> productEntityPage = productRepository.findAll(spec, pageRequest);
         List<ProductListResponseDto> productListResponseDtos = ProductListResponseDto.convertToListResponse(productEntityPage.getContent());
+
         // DTO 변환 및 반환
         return new PaginationResponse<ProductListResponseDto>(
                 productListResponseDtos,
                 PageInfo.builder()
                         .totalItems(productEntityPage.getTotalElements())
                         .totalPages(productEntityPage.getTotalPages())
-                        .currentPage(requestDto.getPage())
+                        .currentPage(requestDto.getPage() + 1)
                         .perPage(requestDto.getPerPage())
                         .build()
         );
-
-//        return PaginationResponse.builder()
-//                .items(productListResponseDtos)
-//                .pagination(PageInfo.builder()
-//                        .totalItems(productEntityPage.getTotalElements())
-//                        .totalPages(productEntityPage.getTotalPages())
-//                        .currentPage(requestDto.getPage())
-//                        .perPage(requestDto.getPerPage())
-//                        .build())
-//                .build();
     }
 
     private Sort getSort(String sortStr) {

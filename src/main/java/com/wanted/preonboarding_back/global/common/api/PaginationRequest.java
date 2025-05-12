@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class PaginationRequest {
-    private int page = 1;
+    private int page = 0;
     
     private int perPage = 10;
 
